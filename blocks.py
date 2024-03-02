@@ -1,8 +1,9 @@
-import torch
 from torch import nn
 
-
 class DiscCNNBlock(nn.Module):
+    '''
+    The CNN block for the discriminator model
+    '''
     def __init__(self, in_channels, out_channels, stride=2):
         super().__init__()
         self.conv = nn.Sequential(
@@ -18,6 +19,9 @@ class DiscCNNBlock(nn.Module):
     
 
 class GenCNNBlock(nn.Module):
+    '''
+    The CNN block for the generator model
+    '''
     def __init__(self, in_channels, out_channels, down=True, act='relu', use_dropout=False):
         super().__init__()
         # Getting conv2d or conv2dtranspose
