@@ -1,10 +1,8 @@
 import torch
-from torch import nn, optim 
-from torch.nn import functional as F
-import pytorch_lightning as pl
+from torch import nn 
 from blocks import GenCNNBlock
 
-class Generator(pl.LightningModule):
+class Generator(nn.Module):
   def __init__(self, in_channels=3, features=64):
     super().__init__()
 
@@ -57,21 +55,6 @@ class Generator(pl.LightningModule):
     u8 = self.final(torch.cat([u7, d1], dim=1))
     return u8
   
-  
-  def training_step(self, batch, batch_idx):
-    pass 
-
-  def validation_step(self, batch, batch_idx):
-    pass
-
-  def test_step(self, batch, batch_idx):
-    pass 
-
-  def predict_step(self, batch, batch_idx, dataloader_idx=None):
-    pass
-
-  def configure_optimizers(self):
-    pass
 
 
 def test():

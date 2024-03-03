@@ -1,0 +1,10 @@
+# constants and configurations
+LR = 2e-4
+BATCH_SIZE = 16
+IMG_SIZE = 256
+CHANNELS_IMG = 3
+L1_LAMBDA = 100
+LAMBDA_GP = 10
+EPOCHS = 500
+LOAD_MODEL = True
+SAVE_MODEL = True

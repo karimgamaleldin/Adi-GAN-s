@@ -1,10 +1,8 @@
 import torch
-from torch import nn, optim 
-from torch.nn import functional as F
-import pytorch_lightning as pl
+from torch import nn 
 from blocks import DiscCNNBlock
 
-class Discriminator(pl.LightningModule):
+class Discriminator(nn.Module):
   def __init__(self, in_channels=3, features=[64, 128, 256, 512]):
     super().__init__()
     # initial layer
@@ -18,8 +16,6 @@ class Discriminator(pl.LightningModule):
     for feature in features[1:]:
       layers.append(DiscCNNBlock(in_channels, feature, stride=1 if feature==features[-1] else 2))
       in_channels = feature
-    
-
     # final layer
     layers.append(nn.Conv2d(in_channels, 1, kernel_size=4, stride=1, padding=1, padding_mode='reflect'))
 
@@ -31,23 +27,7 @@ class Discriminator(pl.LightningModule):
     x = self.initial(x)
     x = self.model(x)
     return x
-  
-  def training_step(self, batch, batch_idx):
-    pass 
 
-  def validation_step(self, batch, batch_idx):
-    pass
-
-  def test_step(self, batch, batch_idx):
-    pass 
-
-  def predict_step(self, batch, batch_idx, dataloader_idx=None):
-    pass
-
-  def configure_optimizers(self):
-    pass
-
-  
 def test():
   print("Testing Discriminator")
   x = torch.randn((1, 3, 256, 256))
