@@ -33,10 +33,10 @@ class GenCNNBlock(nn.Module):
             cnn,
             nn.BatchNorm2d(out_channels),
             act
-        )
+        ) # Ck: Added batchnorm layer
         # Adding dropout
         if use_dropout:
-            self.conv.add_module("dropout", nn.Dropout(0.5))
+            self.conv.add_module("dropout", nn.Dropout(0.5)) # CDk: Added dropout layer
 
 
     def forward(self, x):
