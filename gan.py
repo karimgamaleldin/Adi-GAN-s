@@ -38,8 +38,7 @@ class GAN(pl.LightningModule):
         d_optim.step()
             
         # train generator
-        y_fake = self.generator(sketch)
-        D_fake = self.discriminator(sketch, img)
+        D_fake = self.discriminator(sketch, y_fake)
         G_fake_loss = self.BCE(D_fake, torch.ones_like(D_fake)) # maximize log D(G(Z)) to avoid vanishing gradients
         l1 = self.L1(y_fake, img) * L1_LAMBDA
         G_loss = G_fake_loss + l1
